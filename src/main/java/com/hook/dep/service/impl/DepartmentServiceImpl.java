@@ -2,6 +2,7 @@ package com.hook.dep.service.impl;
 
 import com.hook.dep.dto.DepartmentDto;
 import com.hook.dep.entity.Department;
+import com.hook.dep.exception.ResourceNotFoundException;
 import com.hook.dep.mapper.DepartmentMapper;
 import com.hook.dep.repository.DepartmentRepository;
 import com.hook.dep.service.DepartmentService;
@@ -27,8 +28,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
   @Override
   public DepartmentDto getDepartmentByCode(String departmentCode) {
-    Department department = departmentRepository.findByDepartmentCode(departmentCode);
-
+    Department department = departmentRepository.findByDepartmentCode(departmentCode).orElseThrow(
+        () -> new ResourceNotFoundException("Department", "departmentCode", departmentCode)
+    );
     return departmentMapper.toDto(department);
   }
 }
