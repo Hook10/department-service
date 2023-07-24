@@ -2,6 +2,9 @@ package com.hook.dep.controller;
 
 import com.hook.dep.dto.DepartmentDto;
 import com.hook.dep.service.DepartmentService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(
+        name = "Department Service - Department Controller",
+        description = "Department Controller Exposes REST APIs for Department-Service"
+)
 @RestController
 @RequestMapping("/api/departments")
 @AllArgsConstructor
@@ -20,6 +27,14 @@ public class DepartmentController {
 
   private final DepartmentService departmentService;
 
+  @Operation(
+          summary = "Save Department REST API",
+          description = "Save Department REST API is used to save department object in a database"
+  )
+  @ApiResponse(
+          responseCode = "201",
+          description = "HTTP Status 201 CREATED"
+  )
   // Build save department REST API
   @PostMapping
   public ResponseEntity<DepartmentDto> saveDepartment(@Valid @RequestBody DepartmentDto departmentDto) {
@@ -27,6 +42,14 @@ public class DepartmentController {
     return new ResponseEntity<>(savedDepartment, HttpStatus.CREATED);
   }
 
+  @Operation(
+          summary = "Get Department REST API",
+          description = "Get Department REST API is used to get department object from the database"
+  )
+  @ApiResponse(
+          responseCode = "200",
+          description = "HTTP Status 200 Success"
+  )
   // Build get department rest api
   @GetMapping("/{department-code}")
   public ResponseEntity<DepartmentDto> getDepartment(@PathVariable("department-code") String departmentCode) {

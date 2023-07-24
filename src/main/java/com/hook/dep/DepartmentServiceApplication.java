@@ -1,8 +1,33 @@
 package com.hook.dep;
 
+import io.swagger.v3.oas.annotations.ExternalDocumentation;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@OpenAPIDefinition(
+        info= @Info(
+                title = "Department Service REST APIs",
+                description = "Department Service REST APIs Documentation",
+                version = "v1.0",
+                contact = @Contact(
+                        name = "Hook Ten",
+                        email = "some@mail.com",
+                        url = "https://www.someurl.net"
+                ),
+                license = @License(
+                        name = "Apache 2.0",
+                        url = "www.some.net"
+                )
+        ),
+        externalDocs = @ExternalDocumentation(
+                description = "Department-Service Doc",
+                url = "www.some.net"
+        )
+)
 @SpringBootApplication
 public class DepartmentServiceApplication {
 
